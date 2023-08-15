@@ -7,8 +7,7 @@ defmodule FiiCalculator.Application do
 
   def start(_type, _args) do
     children = [
-      # Start the Telemetry supervisor
-      FiiCalculatorWeb.Telemetry,
+
       # Start the PubSub system
       {Phoenix.PubSub, name: FiiCalculator.PubSub},
       # Start the Endpoint (http/https)
