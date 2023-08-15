@@ -1,0 +1,48 @@
+<h1>Listing FII</h1>
+
+
+<%= form_for @conn, Routes.fiis_path(@conn, :index), [method: :get], fn f ->  %>
+    <%= search_input f, :query, placeholder: "Nome do fii" %>
+    <%= submit "Search" %>
+<% end %>
+
+<ul>
+<%= if @fii_infos != nil do %>
+    <li>
+        <strong>Codigo:</strong>
+        <%= @fii_infos.symbol %>
+    </li>
+    <li>
+        <strong>Nome:</strong>
+        <%= @fii_infos.name %>
+    </li>
+    <li>
+        <strong>Valor do dividendo mensal:</strong>
+        <%= @fii_infos.value %>
+    </li>
+    
+    <li>
+        <strong>Dividend Yield:</strong>
+        <%= @fii_infos.dividendYield %>
+    </li>
+    
+    <li>
+        <strong>Ultimo valor de compra:</strong>
+        <%= @fii_infos.lastPrice %>
+    </li>
+    
+    <li>
+        <strong>Cotas necessarias para 1k reais:</strong>
+        <%= @fii_infos.quote_needed_to_1k %>
+    </li>
+    
+    <li>
+        <strong>Reais necessarios para 1k reais:</strong>
+        <%= @fii_infos.insveted_amount_to_1k %>
+    </li>
+<% end %>
+  
+</ul>
+
+
+<span><%= link "Fii por valores", to: Routes.fiis_path(@conn, :invest_amount) %></span>

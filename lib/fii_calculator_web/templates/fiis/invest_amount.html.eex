@@ -1,0 +1,72 @@
+<%= form_for @conn, Routes.fiis_path(@conn, :invest_amount), [method: :get], fn f ->  %>    
+    
+        <%= label f, "Nome do FII" %>
+        <%= search_input f, :query, placeholder: "Nome do fii *obrigatorio" %>
+        <%= label f, "Quantidade em reais (R$) para investir" %>
+        <%= search_input f, :invested_amount, placeholder: "Quanto deseja investir em reais (opcional)" %>
+        <%= label f, "Quantidade em cotas para investir" %>
+        <%= search_input f, :invested_quote, placeholder: "Quantidade de cotas do Fii (opcional)" %>
+    <%= submit "Search" %>
+<% end %>
+
+
+<ul>
+<%= if @fii_infos != nil do %>
+    <%= if Map.has_key?(@fii_infos, :amount_to_invest) do %>
+        <li>
+            <strong>Rendimento por mes:</strong>
+            <%= @fii_infos.amount_to_invest.dividend_amount %>
+        </li>
+
+        <li>
+            <strong>Quantidade de cotas:</strong>
+            <%= @fii_infos.amount_to_invest.quote_quantity %>
+        </li>
+    <%end%>
+
+    <%= if Map.has_key?(@fii_infos, :quote_quantiy) do %>
+        <li>
+            <strong>Rendimento por mes dado quantidade de cotas:</strong>
+            <%= @fii_infos.quote_quantiy.dividend_amount_by_quote_quantity %>
+        </li>
+    <%end%>
+    <li>
+        <strong>Codigo:</strong>
+        <%= @fii_infos.symbol %>
+    </li>
+    <li>
+        <strong>Nome:</strong>
+        <%= @fii_infos.name %>
+    </li>
+    <li>
+        <strong>Valor do dividendo mensal:</strong>
+        <%= @fii_infos.value %>
+    </li>
+    
+    <li>
+        <strong>Dividend Yield anual:</strong>
+        <%= @fii_infos.dividendYield %>
+    </li>
+
+    <li>
+        <strong>Dividend Yield mensal:</strong>
+        <%= Float.round(@fii_infos.dividendYield/12, 2) %>
+    </li>
+    
+    <li>
+        <strong>Ultimo valor de compra:</strong>
+        <%= @fii_infos.lastPrice %>
+    </li>
+    
+    <li>
+        <strong>Cotas necessarias para 1k reais:</strong>
+        <%= @fii_infos.quote_needed_to_1k %>
+    </li>
+    
+    <li>
+        <strong>Reais necessarios para 1k reais:</strong>
+        <%= @fii_infos.insveted_amount_to_1k %>
+    </li>
+<% end %>
+  
+</ul>
