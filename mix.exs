@@ -9,6 +9,8 @@ defmodule FiiCalculator.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: Mix.compilers(),
       start_permanent: Mix.env() == :prod,
+      description: description(),
+      package: package(),
       aliases: aliases(),
       deps: deps()
     ]
@@ -22,6 +24,21 @@ defmodule FiiCalculator.MixProject do
       mod: {FiiCalculator.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
+  end
+
+    defp package do
+    [
+      files: ["lib", "mix.exs", "README*", "LICENSE*"],
+      maintainers: ["FlockLinx"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/FlockLinx/fii_calculator"}
+    ]
+  end
+
+  defp description do
+    """
+    Fii search tool
+    """
   end
 
   # Specifies which paths to compile per environment.
